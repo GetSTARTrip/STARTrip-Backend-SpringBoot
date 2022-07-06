@@ -12,22 +12,12 @@ import com.startrip.codebase.curation.chains.ChainType;
 import com.startrip.codebase.curation.curationDto.ResponseLocationDto;
 import com.startrip.codebase.domain.place.Place;
 import com.startrip.codebase.domain.place.QPlace;
-import com.startrip.codebase.util.GoogleGeocodeApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import static com.querydsl.core.types.dsl.MathExpressions.*;
 
 @Slf4j
