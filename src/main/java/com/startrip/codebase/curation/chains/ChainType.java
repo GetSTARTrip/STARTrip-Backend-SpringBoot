@@ -1,5 +1,5 @@
 package com.startrip.codebase.curation.chains;
 
 public enum ChainType {
-    FEE, TAG, WEATHER, DATETIME, DATE, LOCATION
+    FEE, TAG, WEATHER, DATETIME, DATE, LOCATION, EVENT_PERIOD
 }

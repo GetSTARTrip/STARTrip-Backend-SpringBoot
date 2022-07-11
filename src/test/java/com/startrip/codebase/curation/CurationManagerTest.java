@@ -88,7 +88,6 @@ class CurationManagerTest {
     @WithMockCustomUser(username = "test@test.com", role = "USER")
     @Test
     public void test2() throws IOException, ClassNotFoundException {
-        createUser();
         CurationInputObject inputObject = new CurationInputObject();
         List<String> userInputTags = new ArrayList<>();
         userInputTags.add("공원");
