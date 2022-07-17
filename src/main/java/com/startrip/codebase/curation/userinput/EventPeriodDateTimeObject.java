@@ -1,6 +1,5 @@
-package com.startrip.codebase.curation.classs;
+package com.startrip.codebase.curation.userinput;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

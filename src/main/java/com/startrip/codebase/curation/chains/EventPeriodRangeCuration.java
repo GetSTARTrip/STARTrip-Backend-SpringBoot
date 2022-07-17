@@ -2,10 +2,8 @@ package com.startrip.codebase.curation.chains;
 
 import com.startrip.codebase.curation.CurationChain;
 import com.startrip.codebase.curation.CurationInputObject;
-import com.startrip.codebase.curation.classs.EventPeriodDateTimeObject;
+import com.startrip.codebase.curation.userinput.EventPeriodDateTimeObject;
 import com.startrip.codebase.domain.event.QEvent;
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class EventPeriodRangeCuration implements
     CurationChain<CurationInputObject, CurationInputObject> {
