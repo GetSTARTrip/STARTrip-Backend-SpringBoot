@@ -88,7 +88,7 @@ class CurationManagerTest {
     @WithMockCustomUser(username = "test@test.com", role = "USER")
     @Test
     public void test2() throws IOException, ClassNotFoundException {
-        createUser();
+        //createUser();
         CurationInputObject inputObject = new CurationInputObject();
         List<String> userInputTags = new ArrayList<>();
         userInputTags.add("공원");
@@ -105,6 +105,4 @@ class CurationManagerTest {
 
         assertThat(inputObject.toString()).isEqualTo(deSerializedObject.toString());
     }
-
-
 }
