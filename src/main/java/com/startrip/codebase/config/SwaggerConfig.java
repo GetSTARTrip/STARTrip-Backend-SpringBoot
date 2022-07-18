@@ -4,6 +4,7 @@ package com.startrip.codebase.config;
 import com.startrip.codebase.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiKey;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableSwagger2
+@EnableWebMvc
 public class SwaggerConfig {
 
     @Bean
