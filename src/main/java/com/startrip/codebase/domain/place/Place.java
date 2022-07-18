@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class wwPlace {
+public class Place {
 
     @Id
     @Column(name = "place_id")

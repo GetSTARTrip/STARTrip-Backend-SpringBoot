@@ -7,11 +7,11 @@ public class CurationPipeline<I, O> {
         this.currentChain = currentChain;
     }
 
-    <K> CurationPipeline<I, K> addChain(CurationChain<O, K> newChain) {
+    public <K> CurationPipeline<I, K> addChain(CurationChain<O, K> newChain) {
         return new CurationPipeline<>(input -> newChain.process(currentChain.process(input)));
     }
 
-    O execute(I input){
+    public O execute(I input){
         return currentChain.process(input);
     }
 }

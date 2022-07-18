@@ -58,6 +58,4 @@ class EventPeriodRangeCurationTest {
 
         System.out.println(curationObject.toString());
     }
-
-
 }
