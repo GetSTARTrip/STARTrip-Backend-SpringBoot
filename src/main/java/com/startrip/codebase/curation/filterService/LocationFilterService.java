@@ -7,9 +7,11 @@ import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.startrip.codebase.curation.CurationChain;
-import com.startrip.codebase.curation.CurationObject;
+
+import com.startrip.codebase.curation.CurationInputObject;
 import com.startrip.codebase.curation.chains.ChainType;
 import com.startrip.codebase.curation.curationDto.ResponseLocationDto;
+import com.startrip.codebase.domain.curation.entity.CurationObject;
 import com.startrip.codebase.domain.place.Place;
 import com.startrip.codebase.domain.place.QPlace;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +24,7 @@ import static com.querydsl.core.types.dsl.MathExpressions.*;
 
 @Slf4j
 @Service
-public class LocationFilterService implements CurationChain<CurationObject, CurationObject> {
+public class LocationFilterService implements CurationChain<CurationInputObject, CurationInputObject> {
 
     @Autowired
     private JPAQueryFactory jpaQueryFactory;
@@ -30,12 +32,16 @@ public class LocationFilterService implements CurationChain<CurationObject, Cura
     Double [] userInputLocate = new Double [2];
 
     @Override
-    public CurationObject process(CurationObject input) {
-        Object object = input.userInput.get(ChainType.LOCATION);
+    public CurationInputObject process(CurationInputObject input) {
+
+
+        Object object = input.getData(ChainType.LOCATION);
+
+
         if (object instanceof Double []){
             userInputLocate= (Double []) object;
             NumberExpression<Double> distanceFormula = getDistanceFormula(userInputLocate[0], userInputLocate[1]);
-            input.booleanBuilder.and(distanceFormula.lt(5));
+            input.getBooleanBuilder().and(distanceFormula.lt(5));
         }
         return input;
     }
@@ -94,16 +100,6 @@ public class LocationFilterService implements CurationChain<CurationObject, Cura
 
         return distance;
     }
-
-    // TODO: Address To Locate Info
-    /* public void convertAddressToLocate(String address){
-        GoogleGeocodeApi googleGeocodeApi = new GoogleGeocodeApi();
-        Map<String, String> result = new HashMap<>();
-        result = googleGeocodeApi.getGeoDataByAddress(address);
-
-        userInputLocate[0] = Double.parseDouble(result.get("lat"));
-        userInputLocate[1] = Double.parseDouble(result.get("lng"));
-    } */
 
 
     public NumberExpression<Double> getDistanceFormula(Double inputLatitude, Double inputLongitude) {
