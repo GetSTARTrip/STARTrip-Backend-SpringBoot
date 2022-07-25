@@ -13,11 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.UUID;
 
 @Slf4j
@@ -34,7 +31,8 @@ public class CurationManager {
         this.curationObjectRepository = curationObjectRepository;
         this.userRepository = userRepository;
 
-        pipeline = new CurationPipeline<>(new TagCuration());
+        pipeline = new CurationPipeline(new TagFilter());
+
     }
 
     public CurationObject start(CurationInputObject userSource) {
