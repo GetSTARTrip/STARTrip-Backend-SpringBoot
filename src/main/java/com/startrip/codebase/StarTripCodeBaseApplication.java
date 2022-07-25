@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @SpringBootApplication
 public class StarTripCodeBaseApplication {
     public static void main(String[] args) {
-        SpringApplication.run(StarTripCodeBaseApplication.class, args);
+         SpringApplication.run(StarTripCodeBaseApplication.class, args);
     }
 }
 
