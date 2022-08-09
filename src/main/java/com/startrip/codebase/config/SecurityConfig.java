@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @RequiredArgsConstructor
@@ -31,6 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private String[] permitList = {
+        "/v2/**",
+        "/configuration/**",
+        "/swagger*/**",
+        "/webjars/**",
+        "/swagger-resources/**"
+    };
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,54 +47,57 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring()
-                .antMatchers(
-                        "/h2-console/**"
-                        ,"/favicon.ico"
-                        ,"/swagger-ui/**"
-                );
+        web.ignoring().antMatchers("/static/css/**, /static/js/**, *.ico");
+
+        // swagger
+        web.ignoring().antMatchers(
+            "/v2/api-docs", "/configuration/ui",
+            "/swagger-resources", "/configuration/security",
+            "/swagger-ui.html", "/webjars/**", "/swagger/**");
+
+        web.ignoring().antMatchers(permitList);
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
-                .csrf().disable()
+            // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
+            .csrf().disable()
 
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+            .exceptionHandling()
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .accessDeniedHandler(jwtAccessDeniedHandler)
 
-                // enable h2-console
-                .and()
-                .headers()
-                .frameOptions()
-                .sameOrigin()
+            // enable h2-console
+            .and()
+            .headers()
+            .frameOptions()
+            .sameOrigin()
 
-                // 세션을 사용하지 않기 때문에 STATELESS로 설정
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            // 세션을 사용하지 않기 때문에 STATELESS로 설정
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-                .and()
-                .authorizeRequests()
+            .and()
+            .authorizeRequests()
+            .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+            .antMatchers("/").permitAll()
+            .antMatchers("/api/user/signup", "api/user/login").permitAll()
+            .antMatchers(permitList).permitAll()
 
-                .antMatchers("/").permitAll()
-                .antMatchers("/api/user/signup", "api/user/login").permitAll()
-                .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
-
-                .and()
-                    .logout()
-                        .logoutSuccessUrl("/")
-                .and()
-                .apply(new JwtSecurityConfig(tokenProvider));
+            .and()
+            .logout()
+            .logoutSuccessUrl("/")
+            .and()
+            .apply(new JwtSecurityConfig(tokenProvider));
 
         httpSecurity
-                .oauth2Login()
-                .userInfoEndpoint().userService(customOAuth2UserService)
-                .and()
-                .successHandler(customAuthenticationSuccessHandler)
-                .permitAll();
+            .oauth2Login()
+            .userInfoEndpoint().userService(customOAuth2UserService)
+            .and()
+            .successHandler(customAuthenticationSuccessHandler)
+            .permitAll();
 
         //.authorizationRequestRepository()
     }

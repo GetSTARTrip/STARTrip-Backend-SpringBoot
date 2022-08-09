@@ -31,8 +31,9 @@ public class CurationManager {
         this.curationObjectRepository = curationObjectRepository;
         this.userRepository = userRepository;
 
-        pipeline = new CurationPipeline(new TagFilter());
-
+        // Event Chain Add
+        pipeline = new CurationPipeline<>(new TagFilter());
+        pipeline.addChain(new EventPeriodRangeCuration());
     }
 
     public CurationObject start(CurationInputObject userSource) {

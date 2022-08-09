@@ -1,47 +1,68 @@
 Configuration:
   name: Default
-  status: info
+  status: warn
+
   Properties:
     Property:
-      name: LOG_PATTERN
-      value: "%d{HH:mm:ss.SSS} [%t] %highlight{[%-5p]} %msg%n}"
+      - name: log-pattern
+        value: "%d{HH:mm:ss.SSS} [%t] %highlight{[%-5p]} %msg%n"
+      - name: log-pattern2
+        value: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %highlight{[%-5p]} %c{1} - %msg%n"
+      - name: log-path
+        value: "logs"
 
   Appenders:
     Console:
-      name: STARTrip_ConsoleLog
+      name: Console_Appender
       target: SYSTEM_OUT
       PatternLayout:
-        pattern: "${LOG_PATTERN}"
+        pattern: "${log-pattern2}"
 
     RollingFile:
-      name: STARTrip_FileLog
-      fileName: ./logs/STARTrip.log
-      filePattern: ./logs/STARTrip-%d{yyyy-MM-dd}-%i.log
-      PatternLayout:
-        pattern: "{LOG_PATTERN}"
-        charset: UTF-8
-      Policies:
-        TimeBasedTriggeringPolicy:
-          interval: 1
-        SizeBasedTriggeringPolicy:
-          size: 100000KB
-      DefaultRolloverStrategy:
-        max: 20
-        fileIndex: min
+      - name: RollingFile_Appender
+        fileName: ${log-path}/STARTrip.log
+        filePattern: ${log-path}/STARTrip-%d{yyyy-MM-dd}-%i.log
+        PatternLayout:
+          pattern: "${log-pattern2}"
+          charset: UTF-8
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 1MB
+        DefaultRolloverStrategy:
+          max: 20
+          fileIndex: min
+      - name: RollingFileError_Appender
+        fileName: ${log-path}/error/STARTrip_Error.log
+        filePattern: ${log-path}/error/STARTrip_Error-%d{yyyy-MM-dd}-%i.log.gz
+        PatternLayout:
+          pattern: "${log-pattern2}"
+          charset: UTF-8
+        Policies:
+          TimeBasedTriggeringPolicy:
+            interval: 1
+          SizeBasedTriggeringPolicy:
+            size: 1MB
+        DefaultRolloverStrategy:
+          max: 20
+          fileIndex: min
+
 
   Loggers:
     Root:
       level: info
-      additivity: false
       AppenderRef:
-        - ref: STARTrip_ConsoleLog
-        - ref: STARTrip_FileLog
+        - ref: Console_Appender
+        - ref: RollingFile_Appender
+        - ref: RollingFileError_Appender
+          level : error
 
           # 패키지별로 로그레벨을 달리 하고 싶다면 여기에 Logger 부분을 추가하세요! (아래는 예시)
     Logger:
-      name: com.startip.codebase.exPackage  #적용할 패키지 경로
+      name: com.startip.codebase  #적용할 패키지 경로
       level: debug #출력시키고 싶은 로그레벨 ( debug 이상의 로그레벨을 다 뜨도록 하겠다~)
       additivity: false #중복으로 발생하는 로그는 제외시키겠다~
       AppenderRef:
-        - ref: STARTrip_ConsoleLog # 윗단에서 만든 Appender를 적용시키겠다 (console에 출력시킴)
-        - ref: STARTrip_FileLog # (File로 저장시킴)
+        - ref: Console_Appender # 윗단에서 만든 Appender를 적용시키겠다 (console에 출력시킴)
+        - ref: RollingFile_Appender # (File로 저장시킴)
