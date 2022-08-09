@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'com.startrip'
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+bootJar { enabled = true }
+jar { enabled = false }
+
+dependencies {
+    compileOnly project(':startrip-core')
+}
+
+test {
+    useJUnitPlatform()
+}

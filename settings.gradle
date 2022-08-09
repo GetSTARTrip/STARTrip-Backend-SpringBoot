@@ -6,3 +6,7 @@ pluginManagement {
     }
 }
 rootProject.name = 'startrip-codebase'
+include 'startrip-api'
+include 'startrip-core'
+include 'startrip-batch'
+

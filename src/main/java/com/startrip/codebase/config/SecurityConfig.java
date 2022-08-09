@@ -1,6 +1,5 @@
 package com.startrip.codebase.config;
 
-import com.startrip.codebase.domain.auth.CustomAccessDeniedHandler;
 import com.startrip.codebase.domain.auth.CustomAuthenticationSuccessHandler;
 import com.startrip.codebase.domain.auth.CustomOAuth2UserService;
 import com.startrip.codebase.jwt.JwtAccessDeniedHandler;
@@ -27,7 +26,6 @@ import org.springframework.web.cors.CorsUtils;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomOAuth2UserService customOAuth2UserService;
-
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -50,11 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/static/css/**, /static/js/**, *.ico");
 
         // swagger
-        web.ignoring().antMatchers(
-            "/v2/api-docs", "/configuration/ui",
-            "/swagger-resources", "/configuration/security",
-            "/swagger-ui.html", "/webjars/**", "/swagger/**");
-
         web.ignoring().antMatchers(permitList);
     }
 
@@ -86,9 +79,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/user/signup", "api/user/login").permitAll()
             .antMatchers(permitList).permitAll()
 
+            .anyRequest().authenticated()
+
             .and()
             .logout()
             .logoutSuccessUrl("/")
+
             .and()
             .apply(new JwtSecurityConfig(tokenProvider));
 

@@ -1,110 +1,48 @@
+// Gradle 빌드 실행 설정
 buildscript {
     ext {
         queryDslVersion = "5.0.0"
+        springBootVersion = '2.6.6'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
     }
 }
 
-plugins {
-    id 'org.springframework.boot' version '2.6.2'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
-    id 'org.springframework.experimental.aot' version '0.11.1'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
-}
+// root 프로젝트와, sub module 설정
+allprojects { }
 
-group = 'com.startrip'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+// 전체 서브 모듈에 대한 설정
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+    group = 'com.startrip'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/release' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //기존 로깅툴 제외
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+        all {
+            exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+            //기존 로깅툴 제외
+        }
     }
-
-    querydsl.extendsFrom compileClasspath
+    dependencies {
+    }
 }
 
-repositories {
-    maven { url 'https://repo.spring.io/release' }
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.2'
-    // Swagger
-    implementation 'io.springfox:springfox-boot-starter:3.0.0'
-    // Config
-    implementation 'org.springframework.cloud:spring-cloud-starter-config:3.1.0'
-
-    // JWT 관련 의존성
-    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
-    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
-    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
-
-    // DB 관련 의존성
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    runtimeOnly 'com.h2database:h2'
-    implementation 'org.postgresql:postgresql'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' //mongo
-
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.2'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth
-
-    //log4j2
-    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
-    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
-    //implementation group: 'org.apache.logging.log4j', name: 'log4j-web', version: '2.17.1'
-//    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
-//    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
-//    implementation group: 'org.apache.logging.log4j', name: 'log4j-jul', version: '2.17.1'
-//    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.1'
-//    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
-//    implementation group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.32'
-
-    //implementation 'com.google.code.findbugs:jsr305:3.0.2'
-
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
-
-    implementation 'org.json:json:20200518'
-    // Test
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.security:spring-security-test:5.6.2'
-
-}
-
-test {
-    useJUnitPlatform()
-}
-
-bootBuildImage {
-    builder = 'paketobuildpacks/builder:tiny'
-    environment = ['BP_NATIVE_IMAGE': 'true']
-}
-
-def querydslDir = "$buildDir/generated/querydsl"
-
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-
-sourceSets {
-    main.java.srcDir querydslDir
-}
-
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
-}
 

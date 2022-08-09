@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'com.startrip'
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    bootJar { enabled = true }
+    jar { enabled = false }
+
+    dependencies {
+        compileOnly project(':startrip-core')
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.2'
+
+        // Swagger
+        implementation 'io.springfox:springfox-boot-starter:3.0.0'
+        implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
