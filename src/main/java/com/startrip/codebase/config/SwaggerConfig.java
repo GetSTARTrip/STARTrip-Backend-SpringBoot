@@ -24,12 +24,12 @@ public class SwaggerConfig {
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any()) // 현재 RequestMapping으로 할당된 모든 URL 리스트를 추출
-                .paths(PathSelectors.ant("/api/**"))
-                .build()
-                .securityContexts(Arrays.asList(securityContext()))
-                .securitySchemes(Arrays.asList(apiKey()));
+            .select()
+            .apis(RequestHandlerSelectors.any())
+            .paths(PathSelectors.ant("/api/**"))
+            .build()
+            .securityContexts(Arrays.asList(securityContext()))
+            .securitySchemes(Arrays.asList(apiKey()));
     }
 
     private ApiKey apiKey() {
@@ -38,12 +38,12 @@ public class SwaggerConfig {
 
     private SecurityContext securityContext() {
         return springfox
-                .documentation
-                .spi.service
-                .contexts
-                .SecurityContext
-                .builder()
-                .securityReferences(defaultAuth()).forPaths(PathSelectors.any()).build();
+            .documentation
+            .spi.service
+            .contexts
+            .SecurityContext
+            .builder()
+            .securityReferences(defaultAuth()).forPaths(PathSelectors.any()).build();
     }
 
     private List<SecurityReference> defaultAuth() {

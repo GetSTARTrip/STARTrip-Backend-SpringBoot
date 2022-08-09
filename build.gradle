@@ -24,6 +24,8 @@ configurations {
     all {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //기존 로깅툴 제외
     }
+
+    querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -47,12 +49,13 @@ dependencies {
 
     // DB 관련 의존성
     compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
     runtimeOnly 'com.h2database:h2'
     implementation 'org.postgresql:postgresql'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' //mongo
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
 
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security:2.6.2'
@@ -99,14 +102,6 @@ querydsl {
 sourceSets {
     main.java.srcDir querydslDir
 }
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-    querydsl.extendsFrom compileClasspath
-}
-//qu
 
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
