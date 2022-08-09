@@ -2,11 +2,13 @@ package com.startrip.codebase.curation.chains;
 
 import com.startrip.codebase.curation.CurationChain;
 import com.startrip.codebase.curation.CurationInputObject;
+import com.startrip.codebase.domain.curation.entity.CurationObject;
 import com.startrip.codebase.domain.place.QPlace;
 
 import java.util.List;
 
-public class TagCuration implements CurationChain<CurationInputObject, CurationInputObject> {
+
+public class TagFilter implements CurationChain<CurationInputObject, CurationInputObject> {
 
     @Override
     public CurationInputObject process(CurationInputObject input) {
