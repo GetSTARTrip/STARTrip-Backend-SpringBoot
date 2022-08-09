@@ -8,10 +8,22 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
     }
 }
+
+plugins {
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 
 // root 프로젝트와, sub module 설정
 allprojects { }
@@ -33,15 +45,24 @@ subprojects {
     }
 
     configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
         all {
             exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
             //기존 로깅툴 제외
         }
     }
     dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        annotationProcessor 'org.projectlombok:lombok'
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    }
+
+    test {
+        useJUnitPlatform()
     }
 }
 

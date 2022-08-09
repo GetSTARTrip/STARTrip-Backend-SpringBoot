@@ -15,46 +15,47 @@ bootJar { enabled = false }
 jar { enabled = true }
 
 dependencies {
-    // Config
-    compileOnly 'org.springframework.cloud:spring-cloud-starter-config:3.1.0'
 
-    // JWT 관련 의존성
-    compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
-    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
-    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+    // Config
+    implementation 'org.springframework.cloud:spring-cloud-starter-config:3.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.2'
+
+    // Swagger
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
     // DB 관련 의존성
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     runtimeOnly 'com.h2database:h2'
-    compileOnly 'org.postgresql:postgresql'
-    compileOnly 'org.springframework.boot:spring-boot-starter-data-mongodb' //mongo
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb' //mongo
 
-    compileOnly "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    compileOnly "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
-    compileOnly 'org.json:json:20200518'
-
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.json:json:20200518'
+    // jwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.3'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.3'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.3'
 
     // Security
-    compileOnly 'org.springframework.boot:spring-boot-starter-security:2.6.7'
-    compileOnly 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.7'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth
 
     //log4j2
-    compileOnly 'org.springframework.boot:spring-boot-starter-log4j2'
-    compileOnly group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compileOnly 'org.springframework.security:spring-security-test:5.6.2'
+    implementation 'org.springframework.security:spring-security-test:5.6.2'
 }
 
-//    bootBuildImage {
-//        builder = 'paketobuildpacks/builder:tiny'
-//        environment = ['BP_NATIVE_IMAGE': 'true']
-//    }
+bootBuildImage {
+    builder = 'paketobuildpacks/builder:tiny'
+    environment = ['BP_NATIVE_IMAGE': 'true']
+}
 
 def querydslDir = "$buildDir/generated/querydsl"
 

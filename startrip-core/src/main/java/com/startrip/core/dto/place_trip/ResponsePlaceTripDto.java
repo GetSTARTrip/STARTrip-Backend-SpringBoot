@@ -1,0 +1,14 @@
+package com.startrip.core.dto.place_trip;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.UUID;
+
+@Getter
+@Setter
+public class ResponsePlaceTripDto {
+    private UUID tripId;
+    private UUID placeId;
+    private String title;
+}

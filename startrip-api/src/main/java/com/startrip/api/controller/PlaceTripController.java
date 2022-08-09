@@ -1,0 +1,82 @@
+package com.startrip.api.controller;
+
+import com.startrip.api.service.trip.PlaceTripService;
+import com.startrip.core.dto.place_trip.CreatePlaceTripDto;
+import com.startrip.core.dto.place_trip.ResponsePlaceTripDto;
+import com.startrip.core.dto.place_trip.UpdatePlaceTripDto;
+import com.startrip.core.entity.place_trip.PlaceTrip;
+import java.util.List;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api")
+public class PlaceTripController {
+    private final PlaceTripService placeTripService;
+
+    @Autowired
+    public PlaceTripController(PlaceTripService placeTripService) {
+        this.placeTripService = placeTripService;
+    }
+
+    // Create
+    @PostMapping("/placetrip")
+    @PreAuthorize("isAuthenticated() and hasAnyRole('USER','ADMIN')")
+    public ResponseEntity createPlaceTrip(@RequestBody CreatePlaceTripDto dto) {
+        UUID id = placeTripService.createPlaceTrip(dto);
+        return new ResponseEntity(id, HttpStatus.OK);
+    }
+
+    // All
+    @GetMapping("/placetrip")
+    public List<ResponsePlaceTripDto> getAllPlaceTrip() {
+        List<ResponsePlaceTripDto> placeTrip = placeTripService.allPlaceTrip();
+        return placeTrip;
+    }
+
+    // Get
+    @GetMapping("/placetrip/{id}")
+    public ResponseEntity getPlaceTrip(@PathVariable("id") UUID id) {
+        PlaceTrip placeTrip;
+        try {
+            placeTrip = placeTripService.getPlaceTrip(id);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(placeTrip, HttpStatus.OK);
+    }
+
+    // Update
+    @PostMapping("/placetrip/{id}")
+    @PreAuthorize("isAuthenticated() and hasAnyRole('USER','ADMIN')")
+    public ResponseEntity updatePlaceTrip(@PathVariable("id") UUID id, @RequestBody UpdatePlaceTripDto dto) {
+        try{
+            placeTripService.updatePlaceTrip(id, dto);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity("Place Trip 업데이트", HttpStatus.OK);
+    }
+
+    // Delete
+    @DeleteMapping("/placetrip/{id}")
+    @PreAuthorize("isAuthenticated() and hasAnyRole('USER','ADMIN')")
+    public ResponseEntity deletePlaceTrip(@PathVariable("id") UUID id){
+        try {
+            placeTripService.deletePlaceTrip(id);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity("Place Trip 삭제", HttpStatus.OK);
+    }
+}

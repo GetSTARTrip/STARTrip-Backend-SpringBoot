@@ -1,0 +1,22 @@
+package com.startrip.core.curation.chains;
+
+import com.startrip.core.curation.CurationChain;
+import com.startrip.core.curation.CurationInputObject;
+import com.startrip.core.curation.userinput.EventPeriodDateTimeObject;
+import com.startrip.core.entity.event.QEvent;
+
+public class EventPeriodRangeCuration implements
+    CurationChain<CurationInputObject, CurationInputObject> {
+
+    @Override
+    public CurationInputObject process(CurationInputObject input) {
+        Object object = input.getData(ChainType.EVENT_PERIOD);
+        if (object != null && object instanceof EventPeriodDateTimeObject) {
+            EventPeriodDateTimeObject userInput = (EventPeriodDateTimeObject) object;
+
+            input.getBooleanBuilder().or(QEvent.event.startDate.after(userInput.getStartDate())
+                .and(QEvent.event.endDate.before(userInput.getEndDate())));
+        }
+        return null;
+    }
+}
