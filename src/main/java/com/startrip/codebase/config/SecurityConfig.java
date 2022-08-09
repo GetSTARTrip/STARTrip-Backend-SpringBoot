@@ -8,6 +8,7 @@ import com.startrip.codebase.jwt.JwtAuthenticationEntryPoint;
 import com.startrip.codebase.jwt.JwtSecurityConfig;
 import com.startrip.codebase.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -37,14 +38,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    private static final String[] DOC_URLS = {
+        "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html","/swagger-ui/**"
+    };
+
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers(
-                        "/h2-console/**"
-                        ,"/favicon.ico"
-                        ,"/swagger-ui/**"
-                );
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+            .and()
+            .ignoring()
+            .antMatchers(DOC_URLS);
     }
 
     @Override
