@@ -1,13 +1,12 @@
 package com.startrip.codebase.service;
 
-import com.startrip.codebase.domain.place.PlaceRepository;
-import com.startrip.codebase.domain.place_info.PlaceInfo;
-import com.startrip.codebase.domain.place_info.PlaceInfoRepository;
-import com.startrip.codebase.dto.PlaceInfoDto;
+import com.startrip.codebase.trip.domain.place.domain.place.PlaceRepository;
+import com.startrip.codebase.trip.domain.place.domain.place_info.PlaceInfo;
+import com.startrip.codebase.trip.domain.place.domain.place_info.PlaceInfoRepository;
+import com.startrip.codebase.trip.domain.place.domain.dto.PlaceInfoDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class PlaceInfoService {

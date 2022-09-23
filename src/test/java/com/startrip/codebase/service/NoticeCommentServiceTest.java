@@ -1,23 +1,22 @@
 package com.startrip.codebase.service;
 
-import com.startrip.codebase.domain.notice.Notice;
-import com.startrip.codebase.domain.notice.NoticeRepository;
-import com.startrip.codebase.domain.notice_comment.NoticeComment;
-import com.startrip.codebase.domain.notice_comment.NoticeCommentRepository;
-import com.startrip.codebase.domain.user.User;
-import com.startrip.codebase.domain.user.UserRepository;
-import com.startrip.codebase.dto.noticecomment.NewCommentDto;
+import com.startrip.codebase.board.NoticeCommentService;
+import com.startrip.codebase.board.notice.Notice;
+import com.startrip.codebase.board.notice.NoticeRepository;
+import com.startrip.codebase.board.notice_comment.NoticeComment;
+import com.startrip.codebase.board.notice_comment.NoticeCommentRepository;
+import com.startrip.codebase.member.domain.user.User;
+import com.startrip.codebase.member.domain.user.UserRepository;
+import com.startrip.codebase.board.noticecomment.NewCommentDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest

@@ -1,37 +1,28 @@
 package com.startrip.codebase.service;
 
-import com.startrip.codebase.domain.category.Category;
-import com.startrip.codebase.domain.category.CategoryRepository;
-import com.startrip.codebase.domain.notice.Notice;
-import com.startrip.codebase.domain.notice.NoticeRepository;
-import com.startrip.codebase.domain.user.User;
-import com.startrip.codebase.domain.user.UserRepository;
-import org.apache.catalina.realm.DataSourceRealm;
-import org.aspectj.lang.annotation.Before;
+import com.startrip.codebase.board.NoticeService;
+import com.startrip.codebase.board.category.Category;
+import com.startrip.codebase.board.category.CategoryRepository;
+import com.startrip.codebase.board.notice.Notice;
+import com.startrip.codebase.board.notice.NoticeRepository;
+import com.startrip.codebase.member.domain.user.User;
+import com.startrip.codebase.member.domain.user.UserRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
-import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)

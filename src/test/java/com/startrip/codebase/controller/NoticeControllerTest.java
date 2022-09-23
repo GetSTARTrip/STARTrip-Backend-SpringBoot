@@ -1,13 +1,12 @@
 package com.startrip.codebase.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.startrip.codebase.config.SecurityConfig;
-import com.startrip.codebase.domain.category.Category;
-import com.startrip.codebase.domain.category.CategoryRepository;
-import com.startrip.codebase.domain.notice.Notice;
-import com.startrip.codebase.domain.notice.NoticeRepository;
-import com.startrip.codebase.dto.LoginDto;
-import com.startrip.codebase.dto.notice.NewNoticeDto;
+import com.startrip.codebase.board.category.Category;
+import com.startrip.codebase.board.category.CategoryRepository;
+import com.startrip.codebase.board.notice.Notice;
+import com.startrip.codebase.board.notice.NoticeRepository;
+import com.startrip.codebase.member.dto.LoginDto;
+import com.startrip.codebase.board.notice.NewNoticeDto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;

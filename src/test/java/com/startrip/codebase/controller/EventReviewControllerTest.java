@@ -2,12 +2,11 @@ package com.startrip.codebase.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.startrip.codebase.domain.event.Event;
-import com.startrip.codebase.domain.event.EventRepository;
-import com.startrip.codebase.domain.event_review.EventReview;
-import com.startrip.codebase.domain.event_review.EventReviewRepository;
-import com.startrip.codebase.domain.event_review.dto.CreateEventReviewDto;
-import com.startrip.codebase.domain.event_review.dto.UpdateEventReviewDto;
+import com.startrip.codebase.trip.domain.event.domain.event.Event;
+import com.startrip.codebase.trip.domain.event.domain.event.EventRepository;
+import com.startrip.codebase.trip.domain.event.domain.event_review.EventReviewRepository;
+import com.startrip.codebase.trip.domain.event.domain.event_review.dto.CreateEventReviewDto;
+import com.startrip.codebase.trip.domain.event.domain.event_review.dto.UpdateEventReviewDto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

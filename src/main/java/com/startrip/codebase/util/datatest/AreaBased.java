@@ -2,7 +2,7 @@ package com.startrip.codebase.util.datatest;
 
 import com.startrip.codebase.domain.datatest.DataTest;
 import com.startrip.codebase.domain.datatest.DataTestRepository;
-import com.startrip.codebase.dto.datatest.DataTestDto;
+import com.startrip.codebase.api.datatest.DataTestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

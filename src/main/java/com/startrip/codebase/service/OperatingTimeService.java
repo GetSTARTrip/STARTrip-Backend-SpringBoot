@@ -2,7 +2,7 @@ package com.startrip.codebase.service;
 
 import com.startrip.codebase.domain.operating_time.OperatingTime;
 import com.startrip.codebase.domain.operating_time.OperatingTimeRepository;
-import com.startrip.codebase.domain.place.PlaceRepository;
+import com.startrip.codebase.trip.domain.place.domain.place.PlaceRepository;
 import com.startrip.codebase.dto.operatingTime.RequestOptimeDto;
 import com.startrip.codebase.dto.operatingTime.UpdateOptimePeriodDto;
 import org.springframework.beans.factory.annotation.Autowired;

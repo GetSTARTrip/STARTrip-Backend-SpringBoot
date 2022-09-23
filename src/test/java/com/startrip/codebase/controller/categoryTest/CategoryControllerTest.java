@@ -1,13 +1,13 @@
 package com.startrip.codebase.controller.categoryTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.startrip.codebase.domain.category.Category;
-import com.startrip.codebase.dto.category.UpdateCategoryDto;
+import com.startrip.codebase.board.category.Category;
+import com.startrip.codebase.board.category.UpdateCategoryDto;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.security.test.context.support.WithMockUser;
-import com.startrip.codebase.domain.category.CategoryRepository;
-import com.startrip.codebase.dto.LoginDto;
-import com.startrip.codebase.dto.category.RequestCategoryDto;
+import com.startrip.codebase.board.category.CategoryRepository;
+import com.startrip.codebase.member.dto.LoginDto;
+import com.startrip.codebase.board.category.RequestCategoryDto;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

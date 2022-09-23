@@ -1,8 +1,7 @@
 package com.startrip.codebase.config;
 
-import com.startrip.codebase.domain.auth.CustomAccessDeniedHandler;
-import com.startrip.codebase.domain.auth.CustomAuthenticationSuccessHandler;
-import com.startrip.codebase.domain.auth.CustomOAuth2UserService;
+import com.startrip.codebase.member.auth.domain.CustomAuthenticationSuccessHandler;
+import com.startrip.codebase.member.auth.domain.CustomOAuth2UserService;
 import com.startrip.codebase.jwt.JwtAccessDeniedHandler;
 import com.startrip.codebase.jwt.JwtAuthenticationEntryPoint;
 import com.startrip.codebase.jwt.JwtSecurityConfig;

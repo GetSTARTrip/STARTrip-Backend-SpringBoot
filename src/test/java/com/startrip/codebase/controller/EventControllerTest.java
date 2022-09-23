@@ -1,8 +1,8 @@
 package com.startrip.codebase.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.startrip.codebase.domain.event.EventRepository;
-import com.startrip.codebase.domain.event.dto.CreateEventDto;
+import com.startrip.codebase.trip.domain.event.domain.event.EventRepository;
+import com.startrip.codebase.trip.domain.event.domain.event.dto.CreateEventDto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.startrip.codebase.controller.categoryTest;
 
-import com.startrip.codebase.domain.category.Category;
+import com.startrip.codebase.board.category.Category;
 import org.junit.jupiter.api.extension.ExtendWith;
-import com.startrip.codebase.domain.category.CategoryRepository;
+import com.startrip.codebase.board.category.CategoryRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

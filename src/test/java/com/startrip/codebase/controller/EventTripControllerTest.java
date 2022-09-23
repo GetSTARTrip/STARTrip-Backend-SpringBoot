@@ -1,12 +1,11 @@
 package com.startrip.codebase.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.startrip.codebase.domain.user.User;
-import com.startrip.codebase.domain.user.UserRepository;
-import com.startrip.codebase.dto.LoginDto;
-import com.startrip.codebase.dto.event_trip.CreateEventTripDto;
-import com.startrip.codebase.dto.event_trip.UpdateEventTripDto;
-import com.startrip.codebase.service.trip.EventTripService;
+import com.startrip.codebase.member.domain.user.User;
+import com.startrip.codebase.member.domain.user.UserRepository;
+import com.startrip.codebase.member.dto.LoginDto;
+import com.startrip.codebase.trip.domain.event.domain.dto.event_trip.CreateEventTripDto;
+import com.startrip.codebase.trip.domain.event.domain.dto.event_trip.UpdateEventTripDto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;

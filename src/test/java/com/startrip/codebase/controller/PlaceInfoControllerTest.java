@@ -1,10 +1,9 @@
 package com.startrip.codebase.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.startrip.codebase.domain.place.PlaceRepository;
-import com.startrip.codebase.dto.LoginDto;
-import com.startrip.codebase.dto.PlaceDto;
-import com.startrip.codebase.dto.PlaceInfoDto;
+import com.startrip.codebase.member.dto.LoginDto;
+import com.startrip.codebase.trip.domain.place.domain.dto.PlaceDto;
+import com.startrip.codebase.trip.domain.place.domain.dto.PlaceInfoDto;
 import com.startrip.codebase.service.PlaceService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

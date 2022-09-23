@@ -1,12 +1,9 @@
 package com.startrip.codebase.service;
 
-import com.startrip.codebase.domain.place.Place;
-import com.startrip.codebase.domain.place.PlaceRepository;
+import com.startrip.codebase.trip.domain.place.domain.place.Place;
+import com.startrip.codebase.trip.domain.place.domain.place.PlaceRepository;
 
-import com.startrip.codebase.domain.place_info.PlaceInfo;
-import com.startrip.codebase.domain.place_info.PlaceInfoRepository;
-import com.startrip.codebase.dto.PlaceDto;
-import com.startrip.codebase.dto.PlaceInfoDto;
+import com.startrip.codebase.trip.domain.place.domain.dto.PlaceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

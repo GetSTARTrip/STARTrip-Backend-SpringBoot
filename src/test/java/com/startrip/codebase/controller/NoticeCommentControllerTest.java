@@ -1,45 +1,33 @@
 package com.startrip.codebase.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.startrip.codebase.domain.category.Category;
-import com.startrip.codebase.domain.category.CategoryRepository;
-import com.startrip.codebase.domain.notice.Notice;
-import com.startrip.codebase.domain.notice.NoticeRepository;
-import com.startrip.codebase.domain.notice_comment.NoticeComment;
-import com.startrip.codebase.domain.notice_comment.NoticeCommentRepository;
-import com.startrip.codebase.domain.user.User;
-import com.startrip.codebase.domain.user.UserRepository;
-import com.startrip.codebase.dto.notice.NewNoticeDto;
-import com.startrip.codebase.dto.noticecomment.NewCommentDto;
-import com.startrip.codebase.dto.noticecomment.UpdateCommentDto;
-import org.apache.http.entity.ContentType;
+import com.startrip.codebase.board.category.Category;
+import com.startrip.codebase.board.category.CategoryRepository;
+import com.startrip.codebase.board.notice.Notice;
+import com.startrip.codebase.board.notice.NoticeRepository;
+import com.startrip.codebase.board.notice_comment.NoticeCommentRepository;
+import com.startrip.codebase.member.domain.user.User;
+import com.startrip.codebase.member.domain.user.UserRepository;
+import com.startrip.codebase.board.noticecomment.NewCommentDto;
+import com.startrip.codebase.board.noticecomment.UpdateCommentDto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)

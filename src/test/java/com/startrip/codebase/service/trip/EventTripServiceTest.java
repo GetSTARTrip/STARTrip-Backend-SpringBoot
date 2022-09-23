@@ -1,9 +1,10 @@
 package com.startrip.codebase.service.trip;
 
-import com.startrip.codebase.domain.event_trip.EventTrip;
-import com.startrip.codebase.domain.event_trip.EventTripRepository;
-import com.startrip.codebase.domain.user.User;
-import com.startrip.codebase.domain.user.UserRepository;
+import com.startrip.codebase.trip.domain.event.domain.event_trip.EventTrip;
+import com.startrip.codebase.trip.domain.event.domain.event_trip.EventTripRepository;
+import com.startrip.codebase.member.domain.user.User;
+import com.startrip.codebase.member.domain.user.UserRepository;
+import com.startrip.codebase.trip.service.EventTripService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

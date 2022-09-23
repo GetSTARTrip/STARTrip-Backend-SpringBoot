@@ -1,22 +1,21 @@
 package com.startrip.codebase.service;
 
-import com.startrip.codebase.domain.event.Event;
-import com.startrip.codebase.domain.event.EventRepository;
-import com.startrip.codebase.domain.event_review.EventReview;
-import com.startrip.codebase.domain.event_review.EventReviewRepository;
+import com.startrip.codebase.trip.domain.event.domain.event.Event;
+import com.startrip.codebase.trip.domain.event.domain.event.EventRepository;
+import com.startrip.codebase.trip.domain.event.domain.event_review.EventReview;
+import com.startrip.codebase.trip.domain.event.domain.event_review.EventReviewRepository;
+import com.startrip.codebase.trip.domain.event.service.EventReviewService;
+import com.startrip.codebase.trip.domain.event.service.EventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.sql.DataSource;
 import java.util.List;
 import java.util.UUID;
 

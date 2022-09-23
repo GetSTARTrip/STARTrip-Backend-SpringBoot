@@ -1,10 +1,11 @@
 package com.startrip.codebase.domain.curation.repository;
 
-import com.startrip.codebase.curation.CurationInputObject;
-import com.startrip.codebase.curation.chains.ChainType;
-import com.startrip.codebase.domain.curation.entity.CurationObject;
-import com.startrip.codebase.domain.user.User;
-import com.startrip.codebase.domain.user.UserRepository;
+import com.startrip.codebase.curation.domain.CurationInputObject;
+import com.startrip.codebase.curation.domain.chains.ChainType;
+import com.startrip.codebase.curation.domain.CurationObject;
+import com.startrip.codebase.curation.repository.CurationObjectRepository;
+import com.startrip.codebase.member.domain.user.User;
+import com.startrip.codebase.member.domain.user.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
