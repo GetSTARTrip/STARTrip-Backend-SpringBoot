@@ -1,9 +1,22 @@
-# need to create README.md
-
+# Startrip Backend
 ---
 
-## Agile Scrum state
 
-1. sprint `initial` [21.01.05 ~ ] :check:
+## 개발환경
 
-2. sprint `1` [21.01.12 ~ 21.01.18] :fire:
+## 사용기술
+
+## 아키텍처
+
+## ERD 설계
+
+## API 명세서
+
+## Documentation
+---
+
+## Support
+---
+
+## License
+---
