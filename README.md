@@ -2,7 +2,6 @@
 빅데이터 기반의 명소 큐레이팅 서비스
 
 
----
 ## 사용기술
 Backend `Java11` `Spring Boot 2.6.2`
 
@@ -23,11 +22,8 @@ ERDCloud : (https://www.erdcloud.com/d/bBM2w4dRqTTamgTwG)
 
 
 ## Documentation
----
 Notion : https://dblab2022.notion.site/dblab2022/STARTrip-9723296f010744dea0490f4627f64e2d
 
 ## Support
----
 
 ## License
----
